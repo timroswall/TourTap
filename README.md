@@ -34,7 +34,7 @@ First-hand experience of handling large quantities of tour bookings manually. Th
 
 - Remember to backup your database!
 
-## How to use
+## Usage
 
 - Go to <http://localhost:3000/>
 - Log in with the demo credentials
@@ -78,3 +78,7 @@ This project is in active development. Contributions and feedback are welcome.
   - creating tours
 - Expanded test suite
 - Implement https
+
+## Contributing
+
+If you would like to contribute, fork the repo and open a pull request to the `main`
