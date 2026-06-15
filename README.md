@@ -24,7 +24,7 @@ First-hand experience of handling large quantities of tour bookings manually. Th
 - An open source alternative for smaller companies to automate their workflow regarding bookings, without breaking the bank and without the need to be a coding virtuoso.
 - Simplicity and mobility: Containerization makes it a breeze to either self-host or run in the cloud.
 
-## Installation
+## Quick Start
 
 1. Make sure to have **docker** and **docker-compose** installed
 2. Clone this repo
