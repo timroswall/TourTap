@@ -64,7 +64,7 @@ First-hand experience of handling large quantities of tour bookings manually. Th
 
 ## Status/Future of TourTap
 
-This project is in active development. Contributions and feedback are welcome.
+This project is in active development.
 
 ### Planned features
 
@@ -81,4 +81,6 @@ This project is in active development. Contributions and feedback are welcome.
 
 ## Contributing
 
-If you would like to contribute, fork the repo and open a pull request to the `main`
+If you would like to contribute, fork the repo and open a pull request to the `main` branch.
+
+Any help and feedback is welcome!
