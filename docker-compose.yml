@@ -58,16 +58,12 @@ services:
       migrate:
         condition: service_completed_successfully
 
-  seed_demo_user:
-    # image: curlimages/curl:8.6.0
-    image: ghcr.io/timroswall/tourtap/seed:latest
-    # volumes:
-    #   - ./seed_demo_user.sh:/seed_demo_user.sh:ro
-    # entrypoint: ["/bin/sh", "/seed_demo_user.sh"]
-    depends_on:
-      backend:
-        condition: service_started
-    restart: "no"
+  # seed_demo_user:
+  #   image: ghcr.io/timroswall/tourtap/seed:latest
+  #   depends_on:
+  #     backend:
+  #       condition: service_started
+  #   restart: "no"
 
   frontend:
     image: ghcr.io/timroswall/tourtap/frontend:latest

@@ -13,8 +13,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile.migrate
 
-  seed_demo_user:
-    image: ghcr.io/timroswall/tourtap/seed:latest
-    build:
-      context: .
-      dockerfile: backend/Dockerfile.seed
+  # seed_demo_user:
+  #   image: ghcr.io/timroswall/tourtap/seed:latest
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.seed
