@@ -1,0 +1,3 @@
+tourtap.dev {
+reverse_proxy frontend:80
+}
