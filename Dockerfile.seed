@@ -1,0 +1,7 @@
+FROM curlimages/curl:8.6.0
+
+COPY seed_demo_user.sh /seed_demo_user.sh
+
+RUN chmod +x /seed_demo_user.sh
+
+ENTRYPOINT ["/bin/sh", "/seed_demo_user.sh"]

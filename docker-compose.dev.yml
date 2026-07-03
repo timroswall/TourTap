@@ -1,16 +1,20 @@
 services:
+  backend:
+    image: ghcr.io/timroswall/tourtap/backend:latest
+    build: ./backend
+
+  frontend:
+    image: ghcr.io/timroswall/tourtap/frontend:latest
+    build: ./frontend
+
   migrate:
+    image: ghcr.io/timroswall/tourtap/migrate:latest
     build:
       context: ./backend
       dockerfile: Dockerfile.migrate
 
-    volumes:
-      - ./backend/sql/schema:/migrations
-
-  backend:
+  seed_demo_user:
+    image: ghcr.io/timroswall/tourtap/seed:latest
     build:
-      context: ./backend
-
-  frontend:
-    build:
-      context: ./frontend
+      context: .
+      dockerfile: backend/Dockerfile.seed

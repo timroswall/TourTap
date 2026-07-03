@@ -30,7 +30,7 @@ services:
       start_period: 30s
 
   migrate:
-    image: ghcr.io/timroswall/tourtap-migrate:latest
+    image: ghcr.io/timroswall/tourtap/migrate:latest
     command:
       - -dir
       - /migrations
@@ -45,7 +45,7 @@ services:
     restart: "no"
 
   backend:
-    image: ghcr.io/timroswall/tourtap-backend:latest
+    image: ghcr.io/timroswall/tourtap/backend:latest
     expose:
       - "8080"
     env_file:
@@ -59,17 +59,18 @@ services:
         condition: service_completed_successfully
 
   seed_demo_user:
-    image: curlimages/curl:8.6.0
-    volumes:
-      - ./seed_demo_user.sh:/seed_demo_user.sh:ro
-    entrypoint: ["/bin/sh", "/seed_demo_user.sh"]
+    # image: curlimages/curl:8.6.0
+    image: ghcr.io/timroswall/tourtap/seed:latest
+    # volumes:
+    #   - ./seed_demo_user.sh:/seed_demo_user.sh:ro
+    # entrypoint: ["/bin/sh", "/seed_demo_user.sh"]
     depends_on:
       backend:
         condition: service_started
     restart: "no"
 
   frontend:
-    image: ghcr.io/timroswall/tourtap-frontend:latest
+    image: ghcr.io/timroswall/tourtap/frontend:latest
     ports:
       - "3000:80"
     depends_on:
