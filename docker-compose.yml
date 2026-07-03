@@ -15,9 +15,9 @@ services:
   db:
     image: postgres:15-alpine
     environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5431:5432"
     volumes:
@@ -30,16 +30,13 @@ services:
       start_period: 30s
 
   migrate:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.migrate
-    volumes:
-      - ./backend/sql/schema:/migrations
-    command: >
-      -dir /migrations
-      postgres
-      ${POSTGRES_URL}
-      up
+    image: ghcr.io/timroswall/tourtap-migrate:latest
+    command:
+      - -dir
+      - /migrations
+      - postgres
+      - ${POSTGRES_URL}
+      - up
     env_file:
       - .env
     depends_on:
@@ -48,9 +45,7 @@ services:
     restart: "no"
 
   backend:
-    build: ./backend/
-    # ports:
-    #   - "8080:8080"
+    image: ghcr.io/timroswall/tourtap-backend:latest
     expose:
       - "8080"
     env_file:
@@ -74,7 +69,7 @@ services:
     restart: "no"
 
   frontend:
-    build: ./frontend
+    image: ghcr.io/timroswall/tourtap-frontend:latest
     ports:
       - "3000:80"
     depends_on:

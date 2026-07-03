@@ -1,0 +1,16 @@
+services:
+  migrate:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.migrate
+
+    volumes:
+      - ./backend/sql/schema:/migrations
+
+  backend:
+    build:
+      context: ./backend
+
+  frontend:
+    build:
+      context: ./frontend
