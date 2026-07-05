@@ -67,7 +67,7 @@ const handleLogin = async () => {
       </InputGroupAddon>
       <FloatLabel>
         <InputText id="email" v-model="email" />
-        <label for="email">Email</label>
+        <label for="email">CI/CD_test</label>
       </FloatLabel>
     </InputGroup>
 
