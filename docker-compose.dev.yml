@@ -49,7 +49,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile.dev
     working_dir: /app
-    command: go run ./cmd/server
+    # command: go run ./cmd/server
+    command: sh -c "go mod download && go run ./cmd/server"
     volumes:
       - ./backend:/app
     env_file:
@@ -69,7 +70,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.dev
     working_dir: /app
-    command: npm run dev -- --host
+    # command: npm run dev -- --host
+    command: sh -c "npm ci && npm run dev -- --host"
     volumes:
       - ./frontend:/app
     ports:
