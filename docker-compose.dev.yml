@@ -1,20 +1,81 @@
 services:
-  backend:
-    image: ghcr.io/timroswall/tourtap/backend:latest
-    build: ./backend
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    mem_limit: 512m
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "check_port_connectivity"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
 
-  frontend:
-    image: ghcr.io/timroswall/tourtap/frontend:latest
-    build: ./frontend
+  db:
+    image: postgres:15-alpine
+    env_file:
+      - .env
+    ports:
+      - "5431:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   migrate:
-    image: ghcr.io/timroswall/tourtap/migrate:latest
     build:
       context: ./backend
       dockerfile: Dockerfile.migrate
+    command:
+      - -dir
+      - /migrations
+      - postgres
+      - ${POSTGRES_URL}
+      - up
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
 
-  # seed_demo_user:
-  #   image: ghcr.io/timroswall/tourtap/seed:latest
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.seed
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    working_dir: /app
+    command: go run ./cmd/server
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    working_dir: /app
+    command: npm run dev -- --host
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
