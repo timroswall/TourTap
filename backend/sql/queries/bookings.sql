@@ -27,7 +27,7 @@ ORDER BY b.date DESC;
 SELECT * FROM bookings
 WHERE date = $1 AND tour_id = $2;
 
--- name: GetAllBookingsOnDate :many
+-- name: GetActiveBookingsOnDate :many
 SELECT
   b.id AS booking_id,
   t.name AS tour_name,
@@ -37,9 +37,9 @@ SELECT
   COALESCE(STRING_AGG(g.email, ', '), '') AS attending_groups
 FROM bookings b
 JOIN tours t ON b.tour_id = t.id
-LEFT JOIN groups g
+JOIN groups g
   ON g.booking_id = b.id
-  AND (g.status = 'accepted' OR g.status = 'confirmed')
+  AND g.status IN ('accepted', 'confirmed')
 WHERE b.date = $1
 GROUP BY b.id, t.name, b.date
 ORDER BY b.date DESC;

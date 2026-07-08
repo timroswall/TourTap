@@ -39,7 +39,7 @@ func (q *Queries) CreateBooking(ctx context.Context, arg CreateBookingParams) (B
 	return i, err
 }
 
-const getAllBookingsOnDate = `-- name: GetAllBookingsOnDate :many
+const getActiveBookingsOnDate = `-- name: GetActiveBookingsOnDate :many
 SELECT
   b.id AS booking_id,
   t.name AS tour_name,
@@ -49,15 +49,15 @@ SELECT
   COALESCE(STRING_AGG(g.email, ', '), '') AS attending_groups
 FROM bookings b
 JOIN tours t ON b.tour_id = t.id
-LEFT JOIN groups g
+JOIN groups g
   ON g.booking_id = b.id
-  AND (g.status = 'accepted' OR g.status = 'confirmed')
+  AND g.status IN ('accepted', 'confirmed')
 WHERE b.date = $1
 GROUP BY b.id, t.name, b.date
 ORDER BY b.date DESC
 `
 
-type GetAllBookingsOnDateRow struct {
+type GetActiveBookingsOnDateRow struct {
 	BookingID       int32
 	TourName        string
 	Date            time.Time
@@ -66,15 +66,15 @@ type GetAllBookingsOnDateRow struct {
 	AttendingGroups interface{}
 }
 
-func (q *Queries) GetAllBookingsOnDate(ctx context.Context, date time.Time) ([]GetAllBookingsOnDateRow, error) {
-	rows, err := q.db.QueryContext(ctx, getAllBookingsOnDate, date)
+func (q *Queries) GetActiveBookingsOnDate(ctx context.Context, date time.Time) ([]GetActiveBookingsOnDateRow, error) {
+	rows, err := q.db.QueryContext(ctx, getActiveBookingsOnDate, date)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []GetAllBookingsOnDateRow
+	var items []GetActiveBookingsOnDateRow
 	for rows.Next() {
-		var i GetAllBookingsOnDateRow
+		var i GetActiveBookingsOnDateRow
 		if err := rows.Scan(
 			&i.BookingID,
 			&i.TourName,

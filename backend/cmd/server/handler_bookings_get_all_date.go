@@ -28,7 +28,7 @@ func (cfg *apiConfig) handlerBookingsGetAllDate(w http.ResponseWriter, r *http.R
 	// 	return
 	// }
 
-	bookings, err := cfg.db.GetAllBookingsOnDate(r.Context(), date)
+	bookings, err := cfg.db.GetActiveBookingsOnDate(r.Context(), date)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "could not get bookings", err)
 		return
