@@ -18,10 +18,12 @@ The project intentionally starts as a monolith to keep deployment simple and ope
 Try the demo:
 
 Admin:
-<https://tourtap.dev/>
+
+- <https://tourtap.dev/>
 
 Customer Booking:
-<https://booking.tourtap.dev/>
+
+- <https://booking.tourtap.dev/>
 
 Log in with the demo credentials
 
@@ -71,16 +73,16 @@ Remember to backup your database!
 
 The admin interface is available at:
 
-  <http://localhost:5371/>
+- <http://localhost:5371/>
 
 The customer booking form is available at:
 
-  <http://booking.localhost:5371>
+- <http://booking.localhost:5371>
 
 Demo credentials:
 
-  Email: `test@email.com`
-  Password: `password`
+- Email: `test@email.com`
+- Password: `password`
 
 The local development setup supports hot reloading of the frontend
 
