@@ -1,3 +1,7 @@
 tourtap.dev {
 reverse_proxy frontend:80
 }
+
+booking.tourtap.dev {
+    reverse_proxy frontend:80
+  }
