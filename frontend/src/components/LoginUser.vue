@@ -60,7 +60,7 @@ const handleLogin = async () => {
 
 <template>
   <div class="flex flex-column row-gap-5">
-    <h1 class="flex justify-content-around flex-wrap">Kan du se det här då? /Tim</h1>
+    <h1 class="flex justify-content-around flex-wrap">Login</h1>
     <InputGroup>
       <InputGroupAddon>
         <i class="pi pi-user"></i>

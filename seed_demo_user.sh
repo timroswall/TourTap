@@ -13,7 +13,7 @@ curl -s -X POST http://backend:8080/api/users \
   -H "Content-Type: application/json" \
   -d '{
     "password": "password",
-    "email": "test@email.com",
+    "email": "test@mail.com",
     "name": "Test McTestson"
   }'
 
