@@ -1,12 +1,11 @@
 import adminRouter from "./admin";
 import bookingRouter from "./booking";
 
-const hostname = window.location.hostname
+const bookingHosts = [
+  "booking.tourtap.dev",
+  "booking.localhost",
+];
 
-const router =
-  hostname === "booking.tourtap.dev" ||
-    hostname === "booking.localhost"
-    ? bookingRouter
-    : adminRouter
-
-export default router
+export default bookingHosts.includes(window.location.hostname)
+  ? bookingRouter
+  : adminRouter;

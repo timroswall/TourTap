@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Booking from '../views/Booking.vue'
+// import Booking from '../views/Booking.vue'
 import Login from '../views/Login.vue'
 import Pending from '@/views/Pending.vue'
 import store from '@/store'
@@ -14,12 +14,12 @@ const router = createRouter({
       component: HomeView,
       meta: { requiresAuth: true }
     },
-    {
-      path: '/booking',
-      name: 'booking',
-      component: Booking,
-      meta: { hideNavbar: true }
-    },
+    // {
+    //   path: '/booking',
+    //   name: 'booking',
+    //   component: Booking,
+    //   meta: { hideNavbar: true }
+    // },
     {
       path: '/login',
       name: 'login',

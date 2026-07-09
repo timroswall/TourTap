@@ -5,6 +5,7 @@ on:
     branches:
       - main
       # - feature/github-actions
+      - feature/booking-portal
 
 jobs:
   deploy:

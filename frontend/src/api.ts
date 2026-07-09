@@ -8,6 +8,11 @@ export const api = axios.create({
   // withCredentials: true,
 });
 
+export const publicApi = axios.create({
+  baseURL: '/api',
+  timeout: 10000,
+});
+
 api.interceptors.request.use(
   (config) => {
     const token = authStore.state?.accessToken;
@@ -98,7 +103,7 @@ export interface Booking {
 
 export const getAllTours = async (): Promise<Tour[]> => {
   try {
-    const response = await api.get('/tours');
+    const response = await publicApi.get('/tours');
     return response.data;
   } catch (error) {
     throw error;
@@ -134,7 +139,7 @@ export const createGroupRequest = async (payload: {
   requested_date: string;
 }): Promise<void> => {
   try {
-    await axios.post('/api/groups/create', payload, {
+    await publicApi.post('/groups/create', payload, {
       headers: {
         'Content-Type': 'application/json',
       },

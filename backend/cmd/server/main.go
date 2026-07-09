@@ -115,7 +115,7 @@ func main() {
 
 	mux.Handle("GET /api/health", http.StripPrefix("/api/", http.HandlerFunc(apiCfg.handlerReadiness)))
 
-	mux.Handle("GET /api/tours", http.StripPrefix("/api/", apiCfg.authMiddleware(http.HandlerFunc(apiCfg.handlerToursGet))))
+	mux.Handle("GET /api/tours", http.StripPrefix("/api/", http.HandlerFunc(apiCfg.handlerToursGet)))
 	mux.Handle("POST /admin/tours/create", http.StripPrefix("/admin/", http.HandlerFunc(apiCfg.handlerToursCreate)))
 
 	mux.Handle("GET /api/bookings/tour-date", http.StripPrefix("/api/", http.HandlerFunc(apiCfg.handlerBookingsGet)))
