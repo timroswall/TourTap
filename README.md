@@ -15,15 +15,12 @@ The application currently runs as a monolith, but the codebase is structured in 
 
 The project intentionally starts as a monolith to keep deployment simple and operational overhead low.
 
-Try the demo:
 
-Admin:
+### Try the demo:
 
-- <https://tourtap.dev/>
+Admin: <https://tourtap.dev/>
 
-Customer Booking:
-
-- <https://booking.tourtap.dev/>
+Customer Booking: <https://booking.tourtap.dev/>
 
 Log in with the demo credentials
 
@@ -71,20 +68,15 @@ Remember to backup your database!
 
 ### Local development
 
-The admin interface is available at:
+The admin interface is available at: <http://localhost:5371/>
 
-- <http://localhost:5371/>
-
-The customer booking form is available at:
-
-- <http://booking.localhost:5371>
+The customer booking form is available at: <http://booking.localhost:5371>
 
 Demo credentials:
-
 - Email: `test@email.com`
 - Password: `password`
 
-The local development setup supports hot reloading of the frontend
+The local development setup supports hot reloading of the frontend.
 
 ### Production deployment
 
@@ -92,13 +84,13 @@ The production environment uses Docker Compose together with GitHub Actions.
 
 When changes are pushed to the deployment branch:
 
-  1. GitHub Actions builds Docker images for:
-    - Frontend
-    - Backend
-    - Database migration service
+1. GitHub Actions builds Docker images for:
+- Frontend
+- Backend
+- Database migration service
 
-  2. Images are pushed to GHCR
-  3. The production server pulls the latest images and restarts the Docker Compose stack.
+2. Images are pushed to GHCR
+3. The production server pulls the latest images and restarts the Docker Compose stack.
 
 The production environment uses the same containerized architecture as local development, keeping deployment simple and reproducible.
 
