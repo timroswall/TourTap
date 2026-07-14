@@ -27,6 +27,8 @@ Log in with the demo credentials
 - Email: `test@email.com`
 - Password: `password`
 
+Please note that the UI isn't adapted for phone screens yet.
+
 ## Motivation
 
 First-hand experience of handling large quantities of tour bookings manually. This experience made me think how to automate the workflow.
@@ -124,6 +126,7 @@ This project is in active development.
   - creating users
   - creating tours
 - Expanded test suite.
+- Adapt to phone screens.
 
 ## Contributing
 
