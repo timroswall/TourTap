@@ -62,7 +62,7 @@ const onSubmit = async (event: FormSubmitEvent) => {
 
   try {
     await createGroupRequest(values);
-    messageText.value = "Request received!\nWe'll review it ASAP\nand email you soon."
+    messageText.value = "Request received!\nWe'll review it ASAP\nand email you soon.\n(Well, when that feauture has been added.)"
     messageSeverity.value = 'success'
 
   } catch (err: any) {
